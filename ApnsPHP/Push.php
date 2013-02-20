@@ -1,4 +1,5 @@
 <?php
+namespace ApnsPHP;
 /**
  * @file
  * ApnsPHP_Push class definition.
@@ -30,7 +31,7 @@
  *
  * @ingroup ApnsPHP_Push
  */
-class ApnsPHP_Push extends ApnsPHP_Abstract
+class Push extends Abstract
 {
 	const COMMAND_PUSH = 1; /**< @type integer Payload command. */
 
@@ -114,19 +115,19 @@ class ApnsPHP_Push extends ApnsPHP_Abstract
 	/**
 	 * Sends all messages in the message queue to Apple Push Notification Service.
 	 *
-	 * @throws ApnsPHP_Push_Exception if not connected to the
+	 * @throws \ApnsPHP\Push\Exception if not connected to the
 	 *         service or no notification queued.
 	 */
 	public function send()
 	{
 		if (!$this->_hSocket) {
-			throw new ApnsPHP_Push_Exception(
+			throw new \ApnsPHP\Push\Exception(
 				'Not connected to Push Notification Service'
 			);
 		}
 
 		if (empty($this->_aMessageQueue)) {
-			throw new ApnsPHP_Push_Exception(
+			throw new \ApnsPHP\Push\Exception(
 				'No notifications queued to be sent'
 			);
 		}
@@ -365,18 +366,18 @@ class ApnsPHP_Push extends ApnsPHP_Abstract
 	 *
 	 * @param  $nMessageID @type integer The Message ID.
 	 * @param  $bError @type boolean @optional Insert the message in the Error container.
-	 * @throws ApnsPHP_Push_Exception if the Message ID is not valid or message
+	 * @throws \ApnsPHP\Push\Exception if the Message ID is not valid or message
 	 *         does not exists.
 	 */
 	protected function _removeMessageFromQueue($nMessageID, $bError = false)
 	{
 		if (!is_numeric($nMessageID) || $nMessageID <= 0) {
-			throw new ApnsPHP_Push_Exception(
+			throw new \ApnsPHP\Push\Exception(
 				'Message ID format is not valid.'
 			);
 		}
 		if (!isset($this->_aMessageQueue[$nMessageID])) {
-			throw new ApnsPHP_Push_Exception(
+			throw new \ApnsPHP\Push\Exception(
 				"The Message ID {$nMessageID} does not exists."
 			);
 		}

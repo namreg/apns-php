@@ -1,4 +1,5 @@
 <?php
+namespace ApnsPHP\Log;
 /**
  * @file
  * ApnsPHP_Log_Interface interface definition.
@@ -30,7 +31,7 @@
  *
  * @ingroup ApnsPHP_Log
  */
-interface ApnsPHP_Log_Interface
+interface LogInterface
 {
 	/**
 	 * Logs a message.

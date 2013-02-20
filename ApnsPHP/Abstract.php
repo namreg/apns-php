@@ -1,4 +1,5 @@
 <?php
+namespace ApnsPHP;
 /**
  * @file
  * ApnsPHP_Abstract class definition.
@@ -37,7 +38,7 @@
  * @ingroup ApplePushNotificationService
  * @see http://tinyurl.com/ApplePushNotificationService
  */
-abstract class ApnsPHP_Abstract
+abstract class Abstract
 {
 	const ENVIRONMENT_PRODUCTION = 0; /**< @type integer Production environment. */
 	const ENVIRONMENT_SANDBOX = 1; /**< @type integer Sandbox environment. */

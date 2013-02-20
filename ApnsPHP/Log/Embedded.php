@@ -1,4 +1,5 @@
 <?php
+namespace ApnsPHP\Log;
 /**
  * @file
  * ApnsPHP_Log_Embedded class definition.
@@ -28,7 +29,7 @@
  *
  * @ingroup ApnsPHP_Log
  */
-class ApnsPHP_Log_Embedded implements ApnsPHP_Log_Interface
+class LogEmbedded implements LogInterface
 {
 	/**
 	 * Logs a message.

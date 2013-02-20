@@ -1,4 +1,6 @@
 <?php
+namespace ApnsPHP;
+
 /**
  * @file
  * ApnsPHP_Feedback class definition.
@@ -36,7 +38,7 @@
  * @ingroup ApnsPHP_Feedback
  * @see http://tinyurl.com/ApplePushNotificationFeedback
  */
-class ApnsPHP_Feedback extends ApnsPHP_Abstract
+class Feedback extends Abstract
 {
 	const TIME_BINARY_SIZE = 4; /**< @type integer Timestamp binary size in bytes. */
 	const TOKEN_LENGTH_BINARY_SIZE = 2; /**< @type integer Token length binary size in bytes. */

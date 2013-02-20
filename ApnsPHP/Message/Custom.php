@@ -1,4 +1,5 @@
 <?php
+namespace ApnsPHP\Message;
 /**
  * @file
  * ApnsPHP_Message_Custom class definition.
@@ -26,7 +27,7 @@
  * @ingroup ApnsPHP_Message
  * @see http://tinyurl.com/ApplePushNotificationPayload
  */
-class ApnsPHP_Message_Custom extends ApnsPHP_Message
+class Custom extends \ApnsPHP\Message
 {
 	protected $_sActionLocKey; /**< @type string The "View" button title. */
 	protected $_sLocKey; /**< @type string A key to an alert-message string in a Localizable.strings file */

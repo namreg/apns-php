@@ -1,4 +1,5 @@
 <?php
+namespace ApnsPHP\Push;
 /**
  * @file
  * ApnsPHP_Push_Exception class definition.
@@ -22,6 +23,6 @@
  *
  * @ingroup ApnsPHP_Push
  */
-class ApnsPHP_Push_Exception extends ApnsPHP_Exception
+class Exception extends \ApnsPHP\Exception
 {
 }

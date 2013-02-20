@@ -1,4 +1,6 @@
 <?php
+namespace ApnsPHP;
+
 /**
  * @file
  * ApnsPHP_Message class definition.
@@ -31,7 +33,7 @@
  * @ingroup ApnsPHP_Message
  * @see http://tinyurl.com/ApplePushNotificationPayload
  */
-class ApnsPHP_Message
+class Message
 {
 	const PAYLOAD_MAXIMUM_SIZE = 256; /**< @type integer The maximum size allowed for a notification payload. */
 	const APPLE_RESERVED_NAMESPACE = 'aps'; /**< @type string The Apple-reserved aps namespace. */
@@ -67,13 +69,13 @@ class ApnsPHP_Message
 	 * Add a recipient device token.
 	 *
 	 * @param  $sDeviceToken @type string Recipients device token.
-	 * @throws ApnsPHP_Message_Exception if the device token
+	 * @throws \ApnsPHP\Message\Exception if the device token
 	 *         is not well formed.
 	 */
 	public function addRecipient($sDeviceToken)
 	{
 		if (!preg_match('~^[a-f0-9]{64}$~i', $sDeviceToken)) {
-			throw new ApnsPHP_Message_Exception(
+			throw new \ApnsPHP\Message\Exception(
 				"Invalid device token '{$sDeviceToken}'"
 			);
 		}
@@ -84,14 +86,14 @@ class ApnsPHP_Message
 	 * Get a recipient.
 	 *
 	 * @param  $nRecipient @type integer @optional Recipient number to return.
-	 * @throws ApnsPHP_Message_Exception if no recipient number
+	 * @throws \ApnsPHP\Message\Exception if no recipient number
 	 *         exists.
 	 * @return @type string The recipient token at index $nRecipient.
 	 */
 	public function getRecipient($nRecipient = 0)
 	{
 		if (!isset($this->_aDeviceTokens[$nRecipient])) {
-			throw new ApnsPHP_Message_Exception(
+			throw new \ApnsPHP\Message\Exception(
 				"No recipient at index '{$nRecipient}'"
 			);
 		}
@@ -142,13 +144,13 @@ class ApnsPHP_Message
 	 * Set the number to badge the application icon with.
 	 *
 	 * @param  $nBadge @type integer A number to badge the application icon with.
-	 * @throws ApnsPHP_Message_Exception if badge is not an
+	 * @throws \ApnsPHP\Message\Exception if badge is not an
 	 *         integer.
 	 */
 	public function setBadge($nBadge)
 	{
 		if (!is_int($nBadge)) {
-			throw new ApnsPHP_Message_Exception(
+			throw new \ApnsPHP\Message\Exception(
 				"Invalid badge number '{$nBadge}'"
 			);
 		}
@@ -191,13 +193,13 @@ class ApnsPHP_Message
 	 * @see http://tinyurl.com/ApplePushNotificationNewsstand
 	 *
 	 * @param  $bContentAvailable @type boolean True to initiates the Newsstand background download.
-	 * @throws ApnsPHP_Message_Exception if ContentAvailable is not a
+	 * @throws \ApnsPHP\Message\Exception if ContentAvailable is not a
 	 *         boolean.
 	 */
 	public function setContentAvailable($bContentAvailable = true)
 	{
 		if (!is_bool($bContentAvailable)) {
-			throw new ApnsPHP_Message_Exception(
+			throw new \ApnsPHP\Message\Exception(
 				"Invalid content-available value '{$bContentAvailable}'"
 			);
 		}
@@ -219,13 +221,13 @@ class ApnsPHP_Message
 	 *
 	 * @param  $sName @type string Custom property name.
 	 * @param  $mValue @type mixed Custom property value.
-	 * @throws ApnsPHP_Message_Exception if custom property name is not outside
+	 * @throws \ApnsPHP\Message\Exception if custom property name is not outside
 	 *         the Apple-reserved 'aps' namespace.
 	 */
 	public function setCustomProperty($sName, $mValue)
 	{
 		if ($sName == self::APPLE_RESERVED_NAMESPACE) {
-			throw new ApnsPHP_Message_Exception(
+			throw new \ApnsPHP\Message\Exception(
 				"Property name '" . self::APPLE_RESERVED_NAMESPACE . "' can not be used for custom property."
 			);
 		}
@@ -281,14 +283,14 @@ class ApnsPHP_Message
 	 * Get the custom property value.
 	 *
 	 * @param  $sName @type string Custom property name.
-	 * @throws ApnsPHP_Message_Exception if no property exists with the specified
+	 * @throws \ApnsPHP\Message\Exception if no property exists with the specified
 	 *         name.
 	 * @return @type string The custom property value.
 	 */
 	public function getCustomProperty($sName)
 	{
 		if (!array_key_exists($sName, $this->_aCustomProperties)) {
-			throw new ApnsPHP_Message_Exception(
+			throw new \ApnsPHP\Message\Exception(
 				"No property exists with the specified name '{$sName}'."
 			);
 		}
@@ -326,7 +328,7 @@ class ApnsPHP_Message
 	{
 		try {
 			$sJSONPayload = $this->getPayload();
-		} catch (ApnsPHP_Message_Exception $e) {
+		} catch (\ApnsPHP\Message\Exception $e) {
 			$sJSONPayload = '';
 		}
 		return $sJSONPayload;
@@ -366,7 +368,7 @@ class ApnsPHP_Message
 	/**
 	 * Convert the message in a JSON-encoded payload.
 	 *
-	 * @throws ApnsPHP_Message_Exception if payload is longer than maximum allowed
+	 * @throws \ApnsPHP\Message\Exception if payload is longer than maximum allowed
 	 *         size and AutoAdjustLongPayload is disabled.
 	 * @return @type string JSON-encoded payload.
 	 */
@@ -394,13 +396,13 @@ class ApnsPHP_Message
 					while (strlen($this->_sText = mb_substr($this->_sText, 0, --$nTextLen, 'UTF-8')) > $nMaxTextLen);
 					return $this->getPayload();
 				} else {
-					throw new ApnsPHP_Message_Exception(
+					throw new \ApnsPHP\Message\Exception(
 						"JSON Payload is too long: {$nJSONPayloadLen} bytes. Maximum size is " .
 						self::PAYLOAD_MAXIMUM_SIZE . " bytes. The message text can not be auto-adjusted."
 					);
 				}
 			} else {
-				throw new ApnsPHP_Message_Exception(
+				throw new \ApnsPHP\Message\Exception(
 					"JSON Payload is too long: {$nJSONPayloadLen} bytes. Maximum size is " .
 					self::PAYLOAD_MAXIMUM_SIZE . " bytes"
 				);
@@ -419,7 +421,7 @@ class ApnsPHP_Message
 	public function setExpiry($nExpiryValue)
 	{
 		if (!is_int($nExpiryValue)) {
-			throw new ApnsPHP_Message_Exception(
+			throw new \ApnsPHP\Message\Exception(
 				"Invalid seconds number '{$nExpiryValue}'"
 			);
 		}
