@@ -1,9 +1,10 @@
-ApnsPHP
+ApnsPHP - Symfony2 Vendor - Fork
 =======
 
-ApnsPHP: Apple Push Notification &amp; Feedback Provider
+this fork is a Apns_PHP namespaced version!
+ideal to use as vendor in sf2 or zf2.
 
-More informations about this project on Google Code:
-
-http://apns-php.googlecode.com/
+Warning
+=======
+Samples not working
 
