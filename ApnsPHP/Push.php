@@ -31,7 +31,7 @@ namespace ApnsPHP;
  *
  * @ingroup ApnsPHP_Push
  */
-class Push extends Abstract
+class Push extends AbstractClass
 {
 	const COMMAND_PUSH = 1; /**< @type integer Payload command. */
 
