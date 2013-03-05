@@ -2,7 +2,7 @@
 namespace ApnsPHP;
 /**
  * @file
- * ApnsPHP_Push class definition.
+ * \ApnsPHP\Push class definition.
  *
  * LICENSE
  *
@@ -19,7 +19,7 @@ namespace ApnsPHP;
  */
 
 /**
- * @defgroup ApnsPHP_Push Push
+ * @defgroup \ApnsPHP\Push Push
  * @ingroup ApplePushNotificationService
  */
 
@@ -29,7 +29,7 @@ namespace ApnsPHP;
  * The class manages a message queue and sends notifications payload to Apple Push
  * Notification Service.
  *
- * @ingroup ApnsPHP_Push
+ * @ingroup \ApnsPHP\Push
  */
 class Push extends AbstractClass
 {
@@ -89,9 +89,9 @@ class Push extends AbstractClass
 	/**
 	 * Adds a message to the message queue.
 	 *
-	 * @param  $message @type ApnsPHP_Message The message.
+	 * @param  $message @type \ApnsPHP\Message The message.
 	 */
-	public function add(ApnsPHP_Message $message)
+	public function add(\ApnsPHP\Message $message)
 	{
 		$sMessagePayload = $message->getPayload();
 		$nRecipients = $message->getRecipientsNumber();
