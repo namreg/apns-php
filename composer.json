@@ -1,5 +1,5 @@
 {
-    "name": "theknarf/apns-php",
+    "name": "varavan/apns-php",
     "type": "library",
     "description": "Fork of ApnsPHP library",
     "keywords": ["ApnsPHP"],
@@ -20,7 +20,7 @@
     },
     "autoload": {
         "psr-0": {
-            "ApnsPHP": "ApnsPHP"
+            "ApnsPHP": ""
         }
     }
 }
