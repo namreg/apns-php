@@ -1,5 +1,5 @@
 {
-    "name": "varavan/apns-php",
+    "name": "theknarf/apns-php",
     "type": "library",
     "description": "Fork of ApnsPHP library",
     "keywords": ["ApnsPHP"],
@@ -10,7 +10,10 @@
             "name": "Ivan Ruiz",
             "email": "ivan.ruiz.delatorre@gmail.com",
             "role": "Developer"
-        }
+        },
+	{
+	    "name": "Frank Lyder Bredland"
+	}
     ],
     "require": {
         "php": ">=5.3.0"
