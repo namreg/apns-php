@@ -1,15 +1,19 @@
 {
-    "name": "varavan/apns-php",
+    "name": "lugaidster/apns-php",
     "type": "library",
     "description": "Fork of ApnsPHP library",
     "keywords": ["ApnsPHP"],
-    "homepage": "https://github.com/varavan/ApnsPHP",
+    "homepage": "https://github.com/lugaidster/apns-php",
     "license": "MIT",
     "authors": [
+    	{
+            "name": "Alberto Simon",
+            "email": "asimonf@outlook.com",
+            "role": "Developer"
+        },
         {
             "name": "Ivan Ruiz",
-            "email": "ivan.ruiz.delatorre@gmail.com",
-            "role": "Developer"
+            "email": "ivan.ruiz.delatorre@gmail.com"
         },
 	{
 	    "name": "Frank Lyder Bredland"
