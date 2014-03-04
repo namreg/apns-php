@@ -419,11 +419,9 @@ abstract class AbstractClass
 	 */
 	protected function _log($sMessage)
 	{
-		if ($this->_bEnableLogging) {
-			if (!isset($this->_logger)) {
-				$this->_logger = new \ApnsPHP\Log\Embedded();
-			}
-			$this->_logger->log($sMessage);
+		if (!isset($this->_logger)) {
+			$this->_logger = new \ApnsPHP\Log\Embedded();
 		}
+		$this->_logger->log($sMessage);
 	}
 }
