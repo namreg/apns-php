@@ -1,4 +1,4 @@
 Apple Push Notification Library
 =======
 
-this fork is a ApnsPHP whith extending with logger!
+this fork is a ApnsPHP whith extending logger!

@@ -74,10 +74,11 @@ abstract class AbstractClass
 	 * @param  $nEnvironment @type integer Environment.
 	 * @param  $sProviderCertificateFile @type string Provider certificate file
 	 *         with key (Bundled PEM).
+	 * @param  \ApnsPHP\Log\LogInterface $oLogger
 	 * @throws \ApnsPHP\Exception if the environment is not
 	 *         sandbox or production or the provider certificate file is not readable.
 	 */
-	public function __construct($nEnvironment, $sProviderCertificateFile)
+	public function __construct($nEnvironment, $sProviderCertificateFile, \ApnsPHP\Log\LogInterface $oLogger = null)
 	{
 		if ($nEnvironment != self::ENVIRONMENT_PRODUCTION && $nEnvironment != self::ENVIRONMENT_SANDBOX) {
 			throw new \ApnsPHP\Exception(
@@ -85,6 +86,10 @@ abstract class AbstractClass
 			);
 		}
 		$this->_nEnvironment = $nEnvironment;
+
+		if ($oLogger) {
+			$this->setLogger($oLogger);
+		}
 
 		if (!is_readable($sProviderCertificateFile)) {
 			throw new \ApnsPHP\Exception(
@@ -414,9 +419,11 @@ abstract class AbstractClass
 	 */
 	protected function _log($sMessage)
 	{
-		if (!isset($this->_logger)) {
-			$this->_logger = new \ApnsPHP\Log\Embedded();
+		if ($this->_bEnableLogging) {
+			if (!isset($this->_logger)) {
+				$this->_logger = new \ApnsPHP\Log\Embedded();
+			}
+			$this->_logger->log($sMessage);
 		}
-		$this->_logger->log($sMessage);
 	}
 }
