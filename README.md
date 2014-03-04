@@ -1,7 +1,4 @@
-ApnsPHP - Symfony2 Vendor - Fork
+Apple Push Notification Library
 =======
 
-this fork is a Apns_PHP namespaced version!
-ideal to use as vendor in sf2 or zf2.
-
-Classes now follow the ApnsPHP namespace and don't have 'Apns_' as part of their name.
+this fork is a ApnsPHP whith extending with logger!

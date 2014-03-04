@@ -1,9 +1,9 @@
 {
-    "name": "lugaidster/apns-php",
+    "name": "namreg/apns-php",
     "type": "library",
-    "description": "Fork of ApnsPHP library",
-    "keywords": ["ApnsPHP"],
-    "homepage": "https://github.com/lugaidster/apns-php",
+    "description": "Apple push notification library. Fork of ApnsPHP",
+    "keywords": ["ApnsPHP", "apple push notification"],
+    "homepage": "https://github.com/namreg/apns-php",
     "license": "MIT",
     "authors": [
     	{
@@ -15,9 +15,10 @@
             "name": "Ivan Ruiz",
             "email": "ivan.ruiz.delatorre@gmail.com"
         },
-	{
-	    "name": "Frank Lyder Bredland"
-	}
+	    {
+		    "name": "Igor German",
+		    "email": "iggerman@yandex.com"
+	    }
     ],
     "require": {
         "php": ">=5.3.0"
