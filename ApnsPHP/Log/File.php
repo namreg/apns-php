@@ -24,7 +24,8 @@ class File implements LogInterface{
 		if (!$this->filePath) {
 			throw new \ApnsPHP\Log\Exception('File not specified');
 		}
-		$message = sprintf("Date: %s - Message: %s\n", (new \DateTime())->format(\DateTime::ISO8601), $sMessage);
+		$dateTime = new \DateTime();
+		$message = sprintf("Date: %s - Message: %s\n", $dateTime->format(\DateTime::ISO8601), $sMessage);
 		file_put_contents($this->filePath, $message, FILE_APPEND);
 	}
 
