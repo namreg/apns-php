@@ -385,7 +385,6 @@ abstract class AbstractClass
 		 * @see http://php.net/manual/en/context.ssl.php
 		 */
 		$streamContext = stream_context_create(array('ssl' => array(
-			'verify_peer' => isset($this->_sRootCertificationAuthorityFile),
 			'cafile' => $this->_sRootCertificationAuthorityFile,
 			'local_cert' => $this->_sProviderCertificateFile
 		)));
