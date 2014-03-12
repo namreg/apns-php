@@ -99,10 +99,12 @@ class Push extends AbstractClass
 		$nMessageQueueLen = count($this->_aMessageQueue);
 		for ($i = 0; $i < $nRecipients; $i++) {
 			$nMessageID = $nMessageQueueLen + $i + 1;
+			$sDeviceToken = $message->getRecipient($i);
 			$this->_aMessageQueue[$nMessageID] = array(
 				'MESSAGE' => $message,
+				'DEVICE_TOKEN' => $sDeviceToken,
 				'BINARY_NOTIFICATION' => $this->_getBinaryNotification(
-					$message->getRecipient($i),
+					$sDeviceToken,
 					$sMessagePayload,
 					$nMessageID,
 					$message->getExpiry(),
