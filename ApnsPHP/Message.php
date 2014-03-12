@@ -51,6 +51,8 @@ class Message
 
 	protected $_nExpiryValue = 604800; /**< @type integer That message will expire in 604800 seconds (86400 * 7, 7 days) if not successful delivered. */
 
+	protected $_nPriorityValue = 10; /**< @type integer Message priority value (integer 5 or 10 are valid values for APNs, default is 10). */
+
 	protected $_mCustomIdentifier; /**< @type mixed Custom message identifier. */
 
 	/**
@@ -441,6 +443,31 @@ class Message
 	public function getExpiry()
 	{
 		return $this->_nExpiryValue;
+	}
+
+	/**
+	 * Set message priority value.
+	 *
+	 * @param  $nPriorityValue @type integer Message priority value (integer 5 or 10 are valid values for APNs).
+	 */
+	public function setPriority($nPriorityValue)
+	{
+		if (!in_array($nPriorityValue, array(5, 10), true)) {
+			throw new \ApnsPHP\Message\Exception(
+				"Invalid priority value '{$nPriorityValue}'"
+			);
+		}
+		$this->_nPriorityValue = $nPriorityValue;
+	}
+
+	/**
+	 * Get message priority value.
+	 *
+	 * @return @type integer Message priority value (5 or 10 are valid values for APNs)
+	 */
+	public function getPriority()
+	{
+		return $this->_nPriorityValue;
 	}
 
 	/**
