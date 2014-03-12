@@ -1,9 +1,9 @@
 {
-    "name": "namreg/apns-php",
+    "name": "feedbee/apns-php",
     "type": "library",
     "description": "Apple push notification library. Fork of ApnsPHP",
     "keywords": ["ApnsPHP", "apple push notification"],
-    "homepage": "https://github.com/namreg/apns-php",
+    "homepage": "https://github.com/feedbee/apns-php",
     "license": "MIT",
     "authors": [
     	{
@@ -18,7 +18,11 @@
 	    {
 		    "name": "Igor German",
 		    "email": "iggerman@yandex.com"
-	    }
+	    },
+        {
+            "name": "Valera Leontyev",
+            "email": "feedbee@gmail.com"
+        }
     ],
     "require": {
         "php": ">=5.3.0"
