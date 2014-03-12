@@ -33,7 +33,7 @@ namespace ApnsPHP;
  */
 class Push extends AbstractClass
 {
-	const COMMAND_PUSH = 1; /**< @type integer Payload command. */
+	const COMMAND_PUSH = 2; /**< @type integer Payload command. */
 
 	const ERROR_RESPONSE_SIZE = 6; /**< @type integer Error-response packet size. */
 	const ERROR_RESPONSE_COMMAND = 8; /**< @type integer Error-response command code. */
@@ -105,7 +105,8 @@ class Push extends AbstractClass
 					$message->getRecipient($i),
 					$sMessagePayload,
 					$nMessageID,
-					$message->getExpiry()
+					$message->getExpiry(),
+					$message->getPriority()
 				),
 				'ERRORS' => array()
 			);
@@ -259,16 +260,30 @@ class Push extends AbstractClass
 	 *         identifies when the notification is no longer valid and can be discarded.
 	 *         Pass a negative value (-1 for example) to request that APNs not store
 	 *         the notification at all. Default is 86400 * 7, 7 days.
+	 * @param  $nPriority @type integer @optional The notification’s priority.
+	 *         Provide one of the following values:
+	 *          - 10 The push message is sent immediately. The push notification must trigger an alert,
+	 *            sound, or badge on the device. It is an error to use this priority for a push that contains
+	 *            only the content-available key.
+	 *          - 5 The push message is sent at a time that conserves power on the device receiving it.
+	 *         Default is 10.
 	 * @return @type string A binary notification.
 	 */
-	protected function _getBinaryNotification($sDeviceToken, $sPayload, $nMessageID = 0, $nExpire = 604800)
+	protected function _getBinaryNotification($sDeviceToken, $sPayload, $nMessageID = 0, $nExpire = 604800, $nPriority = 10)
 	{
-		$nTokenLength = strlen($sDeviceToken);
+		$sDeviceTokenBinary = pack('H*', $sDeviceToken);
+		$nTokenLength = strlen($sDeviceTokenBinary);
 		$nPayloadLength = strlen($sPayload);
 
-		$sRet  = pack('CNNnH*', self::COMMAND_PUSH, $nMessageID, $nExpire > 0 ? time() + $nExpire : 0, self::DEVICE_BINARY_SIZE, $sDeviceToken);
-		$sRet .= pack('n', $nPayloadLength);
-		$sRet .= $sPayload;
+		$sItems  = pack('Cn', 1, $nTokenLength) . $sDeviceTokenBinary; // 1 Device token (32 bytes)
+		$sItems .= pack('Cn', 2, $nPayloadLength) . $sPayload;         // 2 Payload (variable length)
+		$sItems .= pack('CnN', 3, 4, $nMessageID);                     // 3 Notification identifier (4 bytes)
+		$sItems .= pack('CnN', 4, 4, $nExpire);                        // 4 Expiration date (4 bytes)
+		$sItems .= pack('CnC', 5, 1, $nPriority);                      // 5 Priority (1 byte)
+
+		$nFrameDataLength = strlen($sItems);
+
+		$sRet = pack('CN', self::COMMAND_PUSH, $nFrameDataLength) . $sItems;
 
 		return $sRet;
 	}
